@@ -27,6 +27,6 @@ make
 ##
 #### What does the output look like?
 ##### Protected Process Output
-![](https://i.ibb.co/7nF0G7v/image.png)()
+![](https://i.ibb.co/7nF0G7v/image.png)
 ##### Unprotected Process Output
-![](https://i.ibb.co/SRLVtMn/image.png)()
+![](https://i.ibb.co/SRLVtMn/image.png)
