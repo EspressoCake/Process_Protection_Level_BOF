@@ -1,0 +1,40 @@
+beacon_command_register(
+    "process_protection_enum", 
+    "Use syscalls to extract the process protection constants associated with a process identifier.", 
+    "Synopsis: process_protection_enum PID");
+
+
+sub packAndExecuteBOF {
+    local('$handle');
+    local('$file_data');
+    local('$args');
+
+    $handle = openf(script_resource("process_protection_enum.x64.o"));
+    $data = readb($handle, -1);
+    closef($handle);
+
+    # Argument packer
+    $args = bof_pack($1, "i", $2);
+    
+    # Task the Beacon
+    btask($1, "Process Protection Enumerator (@the_bit_diddler)");
+    btask($1, "Attempting to gather handle to provided process: $+ $2");
+
+    # Execution with packed arguments
+    beacon_inline_execute($1, $data, "go", $args);
+}
+
+alias process_protection_enum {
+    # Ensure that we're in an x64 Session
+    if ( !-is64 $1 ) {
+        show_error("This must be a 64-bit process to work effectively. Exiting.");
+    } else {
+        if ( !-isadmin $1 ) {
+            prompt_confirm("Unprivileged beacon, continue?", "Here Be Dragons", {
+                packAndExecuteBOF($1, $2);
+            });
+        } else {
+            packAndExecuteBOF($1, $2);
+        }
+    }
+}
