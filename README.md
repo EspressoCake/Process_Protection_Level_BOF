@@ -25,6 +25,10 @@ make
     process_protection_enum PROCESS_ID_NUMBER
     ```
 ##
+#### I tend to touch the stove carelessly, how are you taking care of the injury-prone?
+- Currently, the `Aggressor` script has safeguards
+    - The current `Beacon` is checked to ensure that it is administrative, and an `x64` process
+##
 #### What does the output look like?
 ##### Protected Process Output
 ![](https://i.ibb.co/7nF0G7v/image.png)
